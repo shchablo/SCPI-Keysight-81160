@@ -2,6 +2,8 @@
 
 This script made to control Pulse Function Arbitrary Noise Generator 81160A.
 
+## Requirements 
+
 <ol>
 <li>pyVISA: https://pyvisa.readthedocs.io/en/latest//li>
 <li>argparse: https://docs.python.org/3/howto/argparse.html</li>
@@ -15,7 +17,7 @@ This script made to control Pulse Function Arbitrary Noise Generator 81160A.
 conda config --add channels conda-forge
 conda install pyvisa
 ```
-you can find check out conda-forge via link: https://github.com/conda-forge/pyvisa-feedstock
+You can find check out conda-forge via link: https://github.com/conda-forge/pyvisa-feedstock
 
 ## Examples
 
