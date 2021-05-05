@@ -12,7 +12,8 @@ def info():
   print("Commands to write states:")
   print("  VOLT[1,2] [value] EX: VOLT1 1.2") 
   print("  AM[1,2]:INT:FUNC [SIN, SQU, RAMP, NRAM, TRI, NOIS, USER] EX: AM2:INT:FUNC SIN") 
-  print('  MMEM:LOAD:STAT [1,2,3,4], "NAME" EX: MMEM:LOAD:STAT 1, "bOISE__"')
+  print("  *RCL [0,1,2,3,4] EX: *RCL 1") 
+
 
 def intro(ip_address, inst):
   print('################################################################################\n') 
@@ -28,7 +29,7 @@ def merge_cmds(commands):
   while(isLoop):
     isLoop = False;
     for idx, cmd in enumerate(commands):
-        if(not(commands[idx].startswith(':')) and idx != 0):
+      if( (not(commands[idx].startswith(':') or commands[idx].startswith('*'))) and idx != 0):
           commands[idx - 1] = (str(commands[idx - 1]) + ' ' + str(commands[idx]))
           commands[idx] = ''
           isLoop = True;
@@ -79,7 +80,6 @@ def main(ip_address, timeout, delay, commands, introduction, information, exampl
     inst.timeout = timeout
   
     commands = merge_cmds(commands)
-    print(commands)  
     for idx, cmd in enumerate(commands): 
         if(cmd.find('?') != -1):
           msg = inst.query(cmd)
@@ -111,7 +111,8 @@ def main(ip_address, timeout, delay, commands, introduction, information, exampl
 parser = argparse.ArgumentParser();
 parser = argparse.ArgumentParser(description='This is the script to read/write the generator (81160A Keysight / Agilent) by a SCPI protocol.')
 parser.add_argument("-ip", "--ip_address", type=str, default="11.73.32.4", required=False, help='<xxx.xxx.xxx.xxx>: If ignore this arg - The default IP will be set.')
-parser.add_argument("-cmd", "--commands", default=[], nargs='+', required=False, help='<:cmd0 :cmd1 :cmdN> This argument can be used for read/write SCPI commands. Any Command must start with \':\'. EX: -cmd :VOLT1? :VOLT1 1.2 :VOLT1?')
+parser.add_argument("-cmd", "--commands", default=[], nargs='+',
+    required=False, help='<:cmd0 :cmd1 :cmdN-1 *cmdN> This argument can be used for read/write SCPI commands. Any Command must start with \':\' or \'*\'. EX: -cmd :VOLT1? :VOLT1 1.2 :VOLT1?')
 parser.add_argument("-t", "--timeout", type=int, default=1000, required=False, help='<int> ms. This argument can be used for set timeout for cmds.')
 parser.add_argument("-d", "--delay", type=int, default=100, required=False,help='<int> ms. This argument can be used for set delay for cmds.')
 parser.add_argument("-exp", "--example", default=False, action = argparse.BooleanOptionalAction, help='Example of code for control pulser.')
