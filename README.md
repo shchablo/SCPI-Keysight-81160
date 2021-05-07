@@ -21,6 +21,8 @@ You can find check out conda-forge via link: https://github.com/conda-forge/pyvi
 
 ## Examples
 
+Inside exp function you can find method how to use code for integration to any python script. 
+
 ```console
 python gen.py -ex
 ```
@@ -44,8 +46,6 @@ python -cmd :VOLT1? :VOLT1 1.33
 ```console
 python gen.py -cmd :VOLT1? :VOLT1 1.33 :VOLT1? :MEM:STAT:NAME? 1 *RCL 1 :VOLT1?
 ```
-
-Inside exp function you can find way how to use code for integration to any python script. 
 
 ## Links 
 
