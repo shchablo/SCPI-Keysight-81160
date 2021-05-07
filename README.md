@@ -28,6 +28,10 @@ python gen.py -cmd :VOLT1? :VOLT1 1.33 :VOLT1? :MEM:STAT:NAME? 1 *RCL 1 :VOLT1?
 ```console
 python gen.py -ex
 ```
+
+```console
+python gen.py -info
+```
 Inside exp function you can find way how to use code for integration to any python script. 
 
 ## Links 
